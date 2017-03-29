@@ -3,6 +3,7 @@
 namespace Alteris\BehatZendframeworkExtension\Context\Initializer;
 
 use Alteris\BehatZendframeworkExtension\Context\ContextAwareInterface;
+use Alteris\BehatZendframeworkExtension\Zend\ApplicationFactoryInterface;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer as BehatContextInitializer;
 use Zend\Mvc\ApplicationInterface;
@@ -14,17 +15,17 @@ use Zend\Mvc\ApplicationInterface;
 class ContextInitializer implements BehatContextInitializer
 {
     /**
-     * @var ApplicationInterface
+     * @var ApplicationFactoryInterface
      */
-    private $application;
+    private $factory;
 
     /**
      * ContextInitializer constructor.
-     * @param ApplicationInterface $application
+     * @param ApplicationFactoryInterface $application
      */
-    public function __construct(ApplicationInterface $application)
+    public function __construct(ApplicationFactoryInterface $factory)
     {
-        $this->application = $application;
+        $this->factory = $factory;
     }
 
 
@@ -36,7 +37,7 @@ class ContextInitializer implements BehatContextInitializer
     public function initializeContext(Context $context)
     {
         if ($context instanceof ContextAwareInterface) {
-            $context->setApplication($this->application);
+            $context->setApplication($this->factory->factory());
         }
     }
 }

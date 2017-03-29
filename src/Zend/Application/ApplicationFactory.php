@@ -2,6 +2,7 @@
 namespace Alteris\BehatZendframeworkExtension\Zend\Application;
 
 use Alteris\BehatZendframeworkExtension\Zend\ApplicationFactoryInterface;
+use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\ApplicationInterface;
 
@@ -32,6 +33,7 @@ class ApplicationFactory implements ApplicationFactoryInterface
      */
     public function factory()
     {
+        Console::overrideIsConsole(false);
         $app = Application::init($this->getConfiguration());
 
         return $app;
@@ -47,7 +49,7 @@ class ApplicationFactory implements ApplicationFactoryInterface
             throw new \RuntimeException(sprintf("Invalid path to configuration: '%s'", $path));
         }
 
-        return require_once $path;
+        return require $path;
     }
 
     /**

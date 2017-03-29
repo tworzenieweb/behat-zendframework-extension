@@ -13,7 +13,7 @@ services:
 
   zendframework_extension.context.initializer:
     class: "%zendframework_extension.context.initializer.class%"
-    arguments: ["@zendframework_extension.zend.application"]
+    arguments: ["@zendframework_extension.zend.application.factory"]
     tags:
       -  { name: context.initializer }
 
