@@ -2,6 +2,7 @@
 
 namespace Alteris\BehatZendframeworkExtension\Zend\Application;
 
+use Alteris\BehatZendframeworkExtension\Context\ContextAwareInterface;
 use Alteris\BehatZendframeworkExtension\Zend\ApplicationFactoryInterface;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
@@ -29,12 +30,15 @@ class ApplicationFactory implements ApplicationFactoryInterface
         $this->configurationPath = $configurationPath;
     }
 
+
+
     /**
+     * @param ContextAwareInterface $context
      * @return ApplicationInterface
      */
-    public function factory()
+    public function factory(ContextAwareInterface $context)
     {
-        Console::overrideIsConsole(false);
+        Console::overrideIsConsole($context->isCliContext());
         $app = Application::init($this->getConfiguration());
 
         return $app;

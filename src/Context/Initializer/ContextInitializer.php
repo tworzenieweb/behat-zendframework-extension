@@ -37,7 +37,7 @@ class ContextInitializer implements BehatContextInitializer
     public function initializeContext(Context $context)
     {
         if ($context instanceof ContextAwareInterface) {
-            $context->setApplication($this->factory->factory());
+            $context->setApplication($this->factory->factory($context));
         }
     }
 }

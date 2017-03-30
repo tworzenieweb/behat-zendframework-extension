@@ -15,4 +15,11 @@ interface ContextAwareInterface
      * @return void
      */
     public function setApplication(ApplicationInterface $application);
+
+
+
+    /**
+     * @return boolean
+     */
+    public function isCliContext();
 }
