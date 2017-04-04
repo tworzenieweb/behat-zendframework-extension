@@ -40,6 +40,8 @@ class ApplicationFactory implements ApplicationFactoryInterface
     {
         Console::overrideIsConsole($context->isCliContext());
         $app = Application::init($this->getConfiguration());
+        $events = $app->getEventManager();
+        $app->getServiceManager()->get('SendResponseListener')->detach($events);
 
         return $app;
     }
